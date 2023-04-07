@@ -16,7 +16,9 @@ $ ex util seq 12
 # CmdGrp file format
 See `example.cmdgrp` for help.
 
-* Whole-line comments start with `--`
+* Whole-line comments start with `----`
+  - Usually this should not clash with commands but just in case this can be
+    configured with `-c` option
 * Empty lines are ignored.
 * Indentation must use tabs i.e. `\t`
 * Commands should be bash commands.

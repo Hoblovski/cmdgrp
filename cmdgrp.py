@@ -38,10 +38,10 @@ def make_chs(ilevels):
 
 
 def main():
-    global infile
+    global infile, COMMENT
     lines = infile.read().splitlines()
     # filter out comments and empty lines
-    lines = [l for l in lines if not l.lstrip().startswith('--') and l.strip() != '']
+    lines = [l for l in lines if not l.lstrip().startswith(COMMENT) and l.strip() != '']
     chs, prs = make_chs([indent_level(line) for line in lines])
     # sanity check
     for lineno in range(len(lines)):
@@ -130,11 +130,15 @@ if __name__ == '__main__':
         default='-',
         help='file name for output script',
     )
+    parser.add_argument(
+        '-c', '--comment', type=str, default='----', help='prefix of comment lines'
+    )
     args = parser.parse_args()
 
-    global infile, outfile
+    global infile, outfile, COMMENT
     infile = args.infile
     outfile = args.outfile
+    COMMENT = args.comment
     outfile.write('#!/bin/bash\n\n')
     main()
     print(f'Done.\nUse `source {outfile.name}` to load script.')
