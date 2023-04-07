@@ -1,0 +1,23 @@
+-- An example cmdgrp
+-- Try it!
+
+
+ex:
+	hello.
+		echo "This is hello from example.cmdgrp"
+	greet:
+		root.
+			echo "You're root; you're the God!"
+		normal.
+			echo "You're $1, a normal user"
+	util:
+		seq.
+			i=0
+			while [[ $i -lt $1 ]];
+			do
+			echo $((++i))
+			done
+		ls.
+			ls
+		pwd.
+			pwd
