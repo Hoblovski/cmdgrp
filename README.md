@@ -26,3 +26,4 @@ See `example.cmdgrp` for help.
 * To define a subcommand fragment, do the same except with one more level of indentation
 * To define a terminal command, write `<name>.` followed by several lines of actual script, 
   each has exactly one more level of indentation than `<name>.`
+* `@init.` defines a command that is executed once on source

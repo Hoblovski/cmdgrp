@@ -55,7 +55,10 @@ def main():
                 print(termcolors.ENDC, end='')
     # generate output script
     for rootline in chs[-1]:
-        recursive_make(lines, chs, prs, rootline)
+        if lines[rootline] == '@init.':
+            make_init(lines, chs, prs, rootline)
+        else:
+            recursive_make(lines, chs, prs, rootline)
     outfile.write(f'echo "sourced. root commands:"\n')
     for rootline in chs[-1]:
         outfile.write(f'echo "  {lines[rootline][:-1]}"\n')
@@ -101,6 +104,12 @@ def recursive_make(lines, chs, prs, lineno):
         # this is a leaf command
         fnname = name_chain(lines, prs, lineno)
         make_term(fnname, [lines[i].strip() for i in chs[lineno]])
+
+
+def make_init(lines, chs, prs, lineno):
+    chlines = [lines[chlineno].strip() for chlineno in chs[lineno]]
+    outfile.write('\n'.join([''] + chlines))
+    outfile.write(f'\n\n\n')
 
 
 def name_chain(lines, prs, lineno):

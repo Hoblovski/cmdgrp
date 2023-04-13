@@ -1,6 +1,8 @@
 ---- An example cmdgrp
 ---- Try it!
 
+@init.
+	echo 'This command is executed exactly once, on the source command'
 
 ex:
 	hello.
